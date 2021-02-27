@@ -7,5 +7,16 @@
                 return false;
             }
         }
+        public function login_check($loginData){
+            $q = $this->db->where(['uname'=>$loginData['uname'],'passwd'=>$loginData['passwd']])
+                            ->get('users');
+            // echo "<pre>";
+            // print_r($q->result());   
+            if($q->num_rows()){
+                return true;
+            }   else{
+                return false;
+            }          
+        }
     }
 ?>
