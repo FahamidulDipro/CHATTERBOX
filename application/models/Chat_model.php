@@ -11,13 +11,21 @@
             $q = $this->db->where(['uname'=>$loginData['uname'],'passwd'=>$loginData['passwd']])
                             ->get('users');
             // echo "<pre>";
-            // print_r($q->result());   
+            // print_r($q->row()->id);   
             if($q->num_rows()){
-                return true;
-                return $q->row()->id;
+                // return true;
+                return $q->row()->id; 
             }   else{
                 return false;
             }          
+        }
+
+        public function user_select($id){
+            $q = $this->db->select('*')
+                            ->where(['id'=>$id])
+                            ->get('users');
+
+                      return $q->row();      
         }
     }
 ?>

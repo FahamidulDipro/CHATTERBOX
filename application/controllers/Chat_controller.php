@@ -15,8 +15,8 @@ class Chat_controller extends CI_Controller
             if($id){
                 $this->load->library('session');
                 $this->session->set_userdata('id',$id);
-                $u['uname']=$this->input->post('uname');
-                $this->load->view('chatPage',$u);
+                $userData['user_data']=$this->Chat_model->user_select($id);
+                $this->load->view('chatPage',$userData);
                 echo "<div class='alert alert-success'><b>Login Successful</b></div>";
             }else{
                 echo "<div class='alert alert-danger'><b>Login Failed! Incorrect Username or Password</b></div>";
@@ -56,5 +56,15 @@ class Chat_controller extends CI_Controller
             $this->load->view('signupPage',compact('upload_error'));
         }
     }
+
+    // public function welcome(){
+    //     $this->load->model('Chat_model');
+    //     $this->Chat_model->
+    //     if(!$this->session->userdata('id')){
+    //         return redirect('Chat_controller/login');
+    //     }else{
+    //         $this->load->view('chatPage');
+    //     }
+    // }
 }
 ?>
