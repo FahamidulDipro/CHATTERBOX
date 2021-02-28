@@ -11,8 +11,12 @@ class Chat_controller extends CI_Controller
         if ($this->form_validation->run('add_login_rule')) {
             $loginData = $this->input->post();
             $this->load->model('Chat_model');
-            if($this->Chat_model->login_check($loginData)){
-                $this->load->view('chatPage');
+            $id=$this->Chat_model->login_check($loginData);
+            if($id){
+                $this->load->library('session');
+                $this->session->set_userdata('id',$id);
+                $u['uname']=$this->input->post('uname');
+                $this->load->view('chatPage',$u);
                 echo "<div class='alert alert-success'><b>Login Successful</b></div>";
             }else{
                 echo "<div class='alert alert-danger'><b>Login Failed! Incorrect Username or Password</b></div>";
@@ -52,16 +56,5 @@ class Chat_controller extends CI_Controller
             $this->load->view('signupPage',compact('upload_error'));
         }
     }
-
-
-    // public function formValidation(){
-    //     if($this->form_validation->run('add_user_rule')){
-    //         echo "OK";
-    //     }
-    //     else{
-    //         $this->load->view('signupPage');
-    //     }
-
-    // }
 }
 ?>

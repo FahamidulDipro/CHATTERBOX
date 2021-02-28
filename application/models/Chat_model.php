@@ -14,6 +14,7 @@
             // print_r($q->result());   
             if($q->num_rows()){
                 return true;
+                return $q->row()->id;
             }   else{
                 return false;
             }          
