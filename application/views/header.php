@@ -28,9 +28,14 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Pricing</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
+        <?php
+          if($this->session->userdata('id')){
+            echo'  <li class="nav-item">
+            <a class="" href="'.base_url('Chat_controller/logout').'" tabindex="-1" aria-disabled="true"><div class="btn btn-outline-light">Logout</div></a>
+          </li>';
+          }
+        ?>
+      
       </ul>
     </div>
   </div>
