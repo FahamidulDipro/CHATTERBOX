@@ -3,10 +3,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Chat_controller extends CI_Controller
 {
 
+// Default loginPage is shown
     public function index()
     {
         $this->load->view('loginPage');
     }
+
+    // Handling login
     public function login()
     {
         if ($this->form_validation->run('add_login_rule')) {
@@ -14,7 +17,6 @@ class Chat_controller extends CI_Controller
             $this->load->model('Chat_model');
             $id = $this->Chat_model->login_check($loginData);
             if ($id) {
-                $this->load->library('session');
                 $this->session->set_userdata('id', $id);
                 $userData['user_data'] = $this->Chat_model->user_select($id);
                 $this->load->view('chatPage', $userData);
@@ -27,12 +29,13 @@ class Chat_controller extends CI_Controller
         }
     }
 
+    // Redirecting to signupPage
     public function registration()
     {
         $this->load->view('signupPage');
     }
 
-
+// Handling Signup
     public function signup()
     {
         $config = [
@@ -65,14 +68,22 @@ class Chat_controller extends CI_Controller
         return redirect('Chat_controller/login');
     }
 
-    // public function welcome(){
-    //     $this->load->model('Chat_model');
-    //     $this->Chat_model->
-    //     if(!$this->session->userdata('id')){
-    //         return redirect('Chat_controller/login');
-    //     }else{
-    //         $this->load->view('chatPage');
-    //     }
-    // }
+
+
+    public function add_chat(){
+       $chat=$this->input->post();
+    //    print_r($chat);
+       if($this->form_validation->run('add_chat_rule')){
+           $this->load->model('Chat_model');
+           $this->Chat_model->addChat($chat);
+           $sc['show_chat']=$this->Chat_model->showChat();
+        //    print_r($sc);
+        //    return redirect('chatPage');
+        //    $c['sh_ch'] = $this->Chat_model->showChat()
+        $this->load->view('chatPage',$sc);
+       }
+    // 
+
+    }
 }
 ?>

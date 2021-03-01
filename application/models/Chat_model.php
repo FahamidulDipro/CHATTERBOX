@@ -27,5 +27,20 @@
 
                       return $q->row();      
         }
+
+        public function addChat($array){
+            if($this->db->insert('chat',$array)){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function showChat(){
+            $q = $this->db->select('*')
+                          ->get('chat');
+             return $q->result();           
+
+        }
     }
 ?>

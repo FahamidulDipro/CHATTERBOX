@@ -33,6 +33,14 @@ $config = [
             'rules' => 'required'
         ],
     ],
+
+    'add_chat_rule' => [
+        [
+            'field' => 'chat',
+            'label' => 'Chat',
+            'rules' => 'required'
+        ],
+    ],
     
 ];
 ?>
